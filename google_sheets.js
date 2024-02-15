@@ -15,17 +15,19 @@ async function getSheetData() {
     if (value && value.length) {
       console.log("Dados da Planilha");
       value.forEach((element) => {
-        const average =
+        const average = Math.round(
           (parseInt(element[3]) + parseInt(element[4]) + parseInt(element[5])) /
-          30;
+            30,
+        );
         if (element[2] > 60 * 0.25) {
           element[6] = "Reprovado por Falta";
           element[7] = "0";
         } else if (average < 5) {
           element[6] = "Reprovado por Nota";
           element[7] = "0";
-        } else if (average > 5 && average < 7) {
+        } else if (average >= 5 && average < 7) {
           element[6] = "Exame Final";
+          element[7] = 5 * 2 - average;
         } else if (average >= 7) {
           element[6] = "Aprovado";
           element[7] = "0";
